@@ -5,7 +5,26 @@ class Api::SongsController < ApplicationController
   end
 
   def show
-    
+    song_id = params[:id]
+    @song = Song.find_by(id: song_id)
+    render 'show.json.jb'
+  end
+
+  def create
+    @song = Song.new(
+      title: params[:title],
+      album: params[:album],
+      artist: params[:artist],
+      year: params[:year]
+    )
+    @song.save
+    render 'show.json.jb'
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.title = params[:title] || @product.title
+    render 'show.json.jb'
   end
 
 end
